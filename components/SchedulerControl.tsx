@@ -89,8 +89,7 @@ const SchedulerControl: React.FC<SchedulerControlProps> = ({
       setSchedulerActive(data.isSchedulerActive || false);
       return data as SchedulerStatus;
     } catch (error) {
-      console.error('스케줄러 상태 확인 실패:');
-      // console.error('스케줄러 상태 확인 실패:', error);
+      console.error('스케줄러 상태 확인 실패:', error);
       return null;
     }
   };

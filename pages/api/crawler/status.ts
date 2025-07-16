@@ -39,7 +39,7 @@ export default async function handler(
       status.totalSentArticles = parsed.sentArticles?.length || 0;
       status.lastSentCount = parsed.totalSent || 0;
     } catch (error) {
-      console.log('마지막 실행 정보 없음');
+      console.log('마지막 실행 정보 없음', error);
     }
 
     // 최근 문서 정보
@@ -53,7 +53,7 @@ export default async function handler(
       status.totalArticles = parsed.totalCount || 0;
       status.lastUpdated = parsed.lastUpdated;
     } catch (error) {
-      console.log('문서 정보 없음');
+      console.log('문서 정보 없음', error);
     }
 
     res.status(200).json(status);

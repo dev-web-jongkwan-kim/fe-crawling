@@ -1,6 +1,6 @@
 // lib/messageSender.ts - 메시지 전송 시스템
 
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Article, MessagePlatform } from '@/types';
 import { DEFAULT_CONFIG, MESSAGE_TEMPLATES } from '@/config/sites';
 

@@ -36,6 +36,7 @@ export default async function handler(
       const parsed = JSON.parse(articlesData) as ArticlesData;
       articles = parsed.articles || [];
     } catch (error) {
+      console.log(error);
       return res.status(200).json({
         articles: [],
         totalCount: 0,

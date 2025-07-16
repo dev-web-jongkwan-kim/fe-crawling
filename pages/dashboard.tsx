@@ -294,7 +294,7 @@ const Dashboard: React.FC = () => {
               <div className="text-center py-8">
                 <p className="text-gray-500">수집된 문서가 없습니다.</p>
                 <p className="text-sm text-gray-400 mt-2">
-                  "수동 크롤링" 버튼을 클릭하여 문서를 수집해보세요.
+                  {'수동 크롤링'} 버튼을 클릭하여 문서를 수집해보세요.
                 </p>
               </div>
             ) : (

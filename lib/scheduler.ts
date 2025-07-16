@@ -45,6 +45,7 @@ export class FrontendNewsScheduler {
       const data = await fs.readFile(this.lastRunFile, 'utf8');
       return JSON.parse(data) as LastRunData;
     } catch (error) {
+      console.log(error);
       const defaultData: LastRunData = {
         lastRunTime: null,
         sentArticles: [],
@@ -214,7 +215,7 @@ export class FrontendNewsScheduler {
         },
         {
           scheduled: false,
-        },
+        } as any,
       );
 
       // 2. 매일 오전 9시 실행 (주요 업데이트)
@@ -226,7 +227,7 @@ export class FrontendNewsScheduler {
         },
         {
           scheduled: false,
-        },
+        } as any,
       );
 
       // 3. 매일 오후 6시 실행 (저녁 업데이트)
@@ -238,7 +239,7 @@ export class FrontendNewsScheduler {
         },
         {
           scheduled: false,
-        },
+        } as any,
       );
 
       // 스케줄 시작
