@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 크롤러 데이터
+data/*.json
+!data/.gitkeep
+
+# 환경 변수
+.env.local
+.env.production
+
+# 로그 파일
+*.log
+logs/

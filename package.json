@@ -6,7 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test:crawler": "tsx scripts/test-crawler.ts",
+    "test:message": "tsx scripts/test-message.ts",
+    "test:status": "tsx scripts/check-status.ts",
+    "crawler:manual": "tsx scripts/send-crawled.ts",
+    "crawler:start": "tsx scripts/start-scheduler.ts",
+    "setup": "npm run setup:folders && npm run setup:env",
+    "setup:folders": "mkdir -p data && touch data/.gitkeep",
+    "setup:env": "cp .env.example .env.local || echo '환경 변수 파일을 수동으로 설정해주세요.'",
+    "clean": "rm -rf .next && rm -rf data/*.json",
+    "clean:data": "rm -rf data/*.json && echo '데이터 파일이 삭제되었습니다.'",
+    "validate": "npm run type-check && npm run lint",
+    "postinstall": "npm run setup:folders"
   },
   "dependencies": {
     "axios": "^1.10.0",
@@ -23,14 +36,23 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/cheerio": "^1.0.0",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^20.19.8",
+    "@types/node-cron": "^3.0.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.37.0",
+    "@typescript-eslint/parser": "^8.37.0",
     "concurrently": "^9.2.0",
-    "eslint": "^9",
+    "eslint": "^9.31.0",
     "eslint-config-next": "15.4.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
     "nodemon": "^3.1.10",
+    "prettier": "^3.6.2",
     "tailwindcss": "^4",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }
