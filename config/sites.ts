@@ -158,25 +158,25 @@ export const DEFAULT_CONFIG = {
 
 // 스케줄 설정
 export const SCHEDULE_CONFIG = {
-  EVERY_30_MINUTES: '*/30 * * * *',
+  // EVERY_30_MINUTES: '*/30 * * * *',
   MORNING_DAILY: '0 9 * * *',
-  EVENING_DAILY: '0 18 * * *',
-  WEEKLY_REPORT: '0 9 * * 1', // 매주 월요일 오전 9시
+  // EVENING_DAILY: '0 18 * * *',
+  // WEEKLY_REPORT: '0 9 * * 1', // 매주 월요일 오전 9시
 } as const;
 
 // 팀별 설정 (확장용)
-export const TEAM_CONFIGS = {
-  frontend: {
-    keywords: ['react', 'vue', 'angular', 'typescript', 'css'],
-    webhook: process.env.FRONTEND_TEAM_WEBHOOK,
-    schedule: SCHEDULE_CONFIG.MORNING_DAILY,
-  },
-  backend: {
-    keywords: ['nodejs', 'python', 'java', 'spring', 'api'],
-    webhook: process.env.BACKEND_TEAM_WEBHOOK,
-    schedule: SCHEDULE_CONFIG.EVENING_DAILY,
-  },
-} as const;
+// export const TEAM_CONFIGS = {
+//   frontend: {
+//     keywords: ['react', 'vue', 'angular', 'typescript', 'css'],
+//     webhook: process.env.FRONTEND_TEAM_WEBHOOK,
+//     schedule: SCHEDULE_CONFIG.MORNING_DAILY,
+//   },
+//   backend: {
+//     keywords: ['nodejs', 'python', 'java', 'spring', 'api'],
+//     webhook: process.env.BACKEND_TEAM_WEBHOOK,
+//     schedule: SCHEDULE_CONFIG.EVENING_DAILY,
+//   },
+// } as const;
 
 // 메시지 템플릿
 export const MESSAGE_TEMPLATES = {
