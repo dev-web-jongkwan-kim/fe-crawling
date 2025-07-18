@@ -103,7 +103,7 @@ const Dashboard: React.FC = () => {
   // 시간 포맷팅 함수
   const formatDate = (dateString: string): string => {
     try {
-      return new Date(dateString).toLocaleDateString('ko-KR');
+      return new Date(dateString).toLocaleString('ko-KR');
     } catch {
       return '날짜 없음';
     }
@@ -280,7 +280,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          <SchedulerControl onStatusChange={fetchStatus} />
+          {/*<SchedulerControl onStatusChange={fetchStatus} />*/}
         </div>
 
         {/* 최근 문서 목록 */}
