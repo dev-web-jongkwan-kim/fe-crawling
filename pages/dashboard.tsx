@@ -114,8 +114,8 @@ const Dashboard: React.FC = () => {
     fetchStatus();
 
     // 30초마다 자동 새로고침
-    const interval = setInterval(fetchStatus, 30000);
-    return () => clearInterval(interval);
+    // const interval = setInterval(fetchStatus, 30000);
+    // return () => clearInterval(interval);
   }, []);
 
   return (

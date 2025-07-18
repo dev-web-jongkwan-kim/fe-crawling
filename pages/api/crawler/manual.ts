@@ -46,7 +46,7 @@ export default async function handler(
       );
       lastRun = JSON.parse(lastRunData) as LastRunData;
     } catch (error) {
-      console.log('이전 전송 기록 없음', error);
+      console.log('이전 전송 기록 없음');
     }
 
     // 3. 새로운 문서만 필터링

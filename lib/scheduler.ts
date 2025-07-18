@@ -207,16 +207,16 @@ export class FrontendNewsScheduler {
 
     try {
       // 1. 매 30분마다 실행
-      const job30min = cron.schedule(
-        SCHEDULE_CONFIG.EVERY_30_MINUTES,
-        () => {
-          console.log('⏰ [30분 주기] 자동 크롤링 실행');
-          this.runCrawlingJob('30min-auto');
-        },
-        {
-          scheduled: false,
-        } as any,
-      );
+      // const job30min = cron.schedule(
+      //   SCHEDULE_CONFIG.EVERY_30_MINUTES,
+      //   () => {
+      //     console.log('⏰ [30분 주기] 자동 크롤링 실행');
+      //     this.runCrawlingJob('30min-auto');
+      //   },
+      //   {
+      //     scheduled: false,
+      //   } as any,
+      // );
 
       // 2. 매일 오전 9시 실행 (주요 업데이트)
       const jobMorning = cron.schedule(
@@ -231,42 +231,42 @@ export class FrontendNewsScheduler {
       );
 
       // 3. 매일 오후 6시 실행 (저녁 업데이트)
-      const jobEvening = cron.schedule(
-        SCHEDULE_CONFIG.EVENING_DAILY,
-        () => {
-          console.log('🌆 [오후 6시] 저녁 크롤링 실행');
-          this.runCrawlingJob('evening-daily');
-        },
-        {
-          scheduled: false,
-        } as any,
-      );
+      // const jobEvening = cron.schedule(
+      //   SCHEDULE_CONFIG.EVENING_DAILY,
+      //   () => {
+      //     console.log('🌆 [오후 6시] 저녁 크롤링 실행');
+      //     this.runCrawlingJob('evening-daily');
+      //   },
+      //   {
+      //     scheduled: false,
+      //   } as any,
+      // );
 
       // 스케줄 시작
-      job30min.start();
+      // job30min.start();
       jobMorning.start();
-      jobEvening.start();
+      // jobEvening.start();
 
       // 스케줄 정보 저장
       this.scheduledJobs = [
-        {
-          name: '30분 주기 크롤링',
-          schedule: SCHEDULE_CONFIG.EVERY_30_MINUTES,
-          task: job30min,
-          isActive: true,
-        },
+        // {
+        //   name: '30분 주기 크롤링',
+        //   schedule: SCHEDULE_CONFIG.EVERY_30_MINUTES,
+        //   task: job30min,
+        //   isActive: true,
+        // },
         {
           name: '오전 9시 일일 크롤링',
           schedule: SCHEDULE_CONFIG.MORNING_DAILY,
           task: jobMorning,
           isActive: true,
         },
-        {
-          name: '오후 6시 저녁 크롤링',
-          schedule: SCHEDULE_CONFIG.EVENING_DAILY,
-          task: jobEvening,
-          isActive: true,
-        },
+        // {
+        //   name: '오후 6시 저녁 크롤링',
+        //   schedule: SCHEDULE_CONFIG.EVENING_DAILY,
+        //   task: jobEvening,
+        //   isActive: true,
+        // },
       ];
 
       console.log('📅 스케줄 등록 완료:');
@@ -299,7 +299,7 @@ export class FrontendNewsScheduler {
           jobInfo.task.destroy();
           jobInfo.isActive = false;
         } catch (error) {
-          console.error(`스케줄 정지 실패: ${jobInfo.name}`, error);
+          console.error(`스케줄 정지 실패: ${jobInfo.name}`);
         }
       });
       this.scheduledJobs = [];
@@ -360,7 +360,7 @@ export class FrontendNewsScheduler {
       }
       return true;
     } catch (error) {
-      console.error(`스케줄 토글 실패: ${jobName}`, error);
+      console.error(`스케줄 토글 실패: ${jobName}`);
       return false;
     }
   }

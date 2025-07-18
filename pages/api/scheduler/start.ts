@@ -1,8 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import FrontendNewsScheduler from '@/lib/scheduler';
 
-// 전역 스케줄러 인스턴스 (서버 재시작 전까지 유지)
-let globalScheduler: FrontendNewsScheduler | null = null;
+// 전역 타입 선언
+declare global {
+  var globalScheduler: FrontendNewsScheduler | undefined;
+}
 
 interface SchedulerStartResponse {
   success: boolean;
@@ -22,34 +24,41 @@ export default async function handler(
   }
 
   try {
-    if (globalScheduler) {
-      // 기존 스케줄러가 있다면 정지
-      globalScheduler.stopScheduler();
+    // 기존 스케줄러가 있다면 정지
+    if (globalThis.globalScheduler) {
+      console.log('🔄 기존 스케줄러 정지 중...');
+      await globalThis.globalScheduler.cleanup();
     }
 
-    // 새 스케줄러 인스턴스 생성 및 시작
-    globalScheduler = new FrontendNewsScheduler();
-    const success = globalScheduler.startScheduler();
+    // 새 스케줄러 인스턴스 생성 및 전역에 할당
+    console.log('🚀 새 스케줄러 인스턴스 생성 중...');
+    globalThis.globalScheduler = new FrontendNewsScheduler();
+
+    const success = globalThis.globalScheduler.startScheduler();
 
     if (success) {
+      console.log('✅ 스케줄러 시작 완료 - 전역 인스턴스 생성됨');
+
       const response: SchedulerStartResponse = {
         success: true,
         message: '스케줄러가 시작되었습니다.',
         timestamp: new Date().toISOString(),
-        schedules: [
-          '매 30분마다 자동 크롤링',
-          '매일 오전 9시 메인 업데이트',
-          '매일 오후 6시 저녁 업데이트',
-        ],
+        schedules: ['매일 오전 9시 메인 업데이트'],
       };
       res.status(200).json(response);
     } else {
+      // 실패 시 전역 인스턴스 제거
+      globalThis.globalScheduler = undefined;
       res.status(500).json({
         error: '스케줄러 시작 실패',
       });
     }
   } catch (error) {
     console.error('스케줄러 시작 실패:', error);
+
+    // 에러 발생 시 전역 인스턴스 정리
+    globalThis.globalScheduler = undefined;
+
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
     res.status(500).json({

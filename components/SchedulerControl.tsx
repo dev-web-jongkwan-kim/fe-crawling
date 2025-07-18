@@ -75,7 +75,6 @@ const SchedulerControl: React.FC<SchedulerControlProps> = ({
       const errorMessage =
         error instanceof Error ? error.message : 'Unknown error';
       setError('스케줄러 정지 요청 실패: ' + errorMessage);
-      console.error('스케줄러 정지 실패:', error);
       alert('❌ 스케줄러 정지 요청 실패');
     }
 
@@ -89,7 +88,9 @@ const SchedulerControl: React.FC<SchedulerControlProps> = ({
       setSchedulerActive(data.isSchedulerActive || false);
       return data as SchedulerStatus;
     } catch (error) {
-      console.error('스케줄러 상태 확인 실패:', error);
+      if (error) {
+      }
+      console.error('스케줄러 상태 확인 실패:');
       return null;
     }
   };
@@ -151,8 +152,7 @@ const SchedulerControl: React.FC<SchedulerControlProps> = ({
 
       <div className="mt-4 text-xs text-gray-500">
         <div className="font-medium mb-1">자동 실행 일정:</div>
-        <div>• 매 30분마다 크롤링</div>
-        <div>• 매일 오전 9시, 오후 6시</div>
+        <div>• 매일 오전 9시</div>
       </div>
     </div>
   );

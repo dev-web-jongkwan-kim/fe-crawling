@@ -81,7 +81,7 @@ export default async function handler(
 
     res.status(200).json(response);
   } catch (error) {
-    console.error('문서 목록 조회 실패:', error);
+    console.error('문서 목록 조회 실패:');
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
     res.status(500).json({
